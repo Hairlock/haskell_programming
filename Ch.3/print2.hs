@@ -5,4 +5,4 @@ module Print2 where
         putStrLn "Count to four for me:"
         putStr "one, two"
         putStr ", three, and"
-        putStrLn " four!"
+        putStrLn " four!"            
