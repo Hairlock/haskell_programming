@@ -18,3 +18,24 @@ module Exercises where
     oneIsOne = dodgy 1
 
     oneIsTwo = (flip dodgy) 2
+
+
+    tensDigit :: Integral a => a -> a
+    tensDigit x = d
+        where d = fst $ divMod x 10
+
+    
+    foldBool3Case :: a -> a -> Bool -> a
+    foldBool3Case x y t = case t of
+                            True -> x
+                            _ -> y
+
+    
+    foldBool3Guard :: a -> a -> Bool -> a
+    foldBool3Guard x y t
+        | t == True = x
+        | otherwise = y
+
+    
+    g :: (a -> b) -> (a, c) -> (b, c)
+    g aToB (a, c) = (aToB a, c)
