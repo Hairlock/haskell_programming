@@ -39,3 +39,30 @@ module Exercises where
     
     g :: (a -> b) -> (a, c) -> (b, c)
     g aToB (a, c) = (aToB a, c)
+
+
+    sumToN :: (Eq a, Num a) => a -> a
+    sumToN 0 = 0
+    sumToN 1 = 1
+    sumToN n = n + sumToN (n - 1)
+
+
+    data DividedResult =
+        Result (Integer, Integer)
+        | DividedByZero
+        deriving (Show)
+
+    sign x y
+        | x*y < 0 = -1
+        | otherwise = 1
+    
+    dividedBy :: Integer -> Integer -> DividedResult
+    dividedBy _ 0 = DividedByZero
+    dividedBy num denom = 
+        let
+            (a, b) = go (abs num) (abs denom) 0
+            go n d count
+                | n < d = (count, n) 
+                | otherwise = go (n - d) d (count + 1)
+        in
+            Result ((sign num denom) * a, b)
