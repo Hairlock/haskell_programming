@@ -30,3 +30,11 @@ module Exercises where
 
     myOr :: [Bool] -> Bool
     myOr = foldr (||) False
+
+
+    myAny :: (a -> Bool) -> [a] -> Bool
+    myAny f = foldr ((||) . f) False
+
+
+    myElem :: Eq a => a -> [a] -> Bool
+    myElem x = foldr (\i acc -> x == i) False
