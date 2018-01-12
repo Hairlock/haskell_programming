@@ -35,6 +35,31 @@ module Exercises where
     myAny :: (a -> Bool) -> [a] -> Bool
     myAny f = foldr ((||) . f) False
 
-
     myElem :: Eq a => a -> [a] -> Bool
-    myElem x = foldr (\i acc -> x == i) False
+    myElem x = foldr (\i acc -> acc || x == i) False
+
+    myReverse :: [a] -> [a]
+    myReverse = foldl (flip (:)) []
+
+    
+    myMap :: (a -> b) -> [a] -> [b]
+    myMap f = foldr (\x acc -> f x : acc) []
+
+    myFilter :: (a -> Bool) -> [a] -> [a]
+    myFilter f = foldr (\x acc -> case f x of
+                                    True -> x : acc
+                                    _ -> acc) []
+
+    squish :: [[a]] -> [a]
+    squish = foldr (++) []
+    
+    squishMap :: (a -> [b]) -> [a] -> [b]
+    squishMap f = foldr ((++) . f) []
+
+    squishAgain :: [[a]] -> [a]
+    squishAgain = squishMap id
+
+    myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
+    myMaximumBy f xs = foldr (\x acc -> case f x acc of
+                                        GT -> x
+                                        _ -> acc) (last xs) xs
