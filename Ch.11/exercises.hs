@@ -1,6 +1,7 @@
 module Exercises where
 
     import Data.Char
+    import Data.List
 
     isSubsequenceOf :: (Eq a) => [a] -> [a] -> Bool
     isSubsequenceOf [] [] = error "emptry strings not allowed"
@@ -18,3 +19,13 @@ module Exercises where
 
     capitalizeWord :: String -> String
     capitalizeWord (x:xs) = toUpper x : [] ++ xs
+
+    splitOn :: Char -> String -> [String]
+    splitOn c [] = []
+    splitOn c xs  = (takeWhile (/=c) xs) : splitOn c (drop 1 $ dropWhile (/=c) xs)
+
+    capitalizeParagraph :: String -> String
+    capitalizeParagraph x = (concat $ intersperse ". " capitals) ++ "."
+        where capitals  = map capitalizeWord separated
+              separated = splitOn '.' x
+
