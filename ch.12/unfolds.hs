@@ -12,4 +12,11 @@ module Unfolds where
     bs' Nothing       = []
 
     myUnfoldr :: (b -> Maybe(a, b)) -> b -> [a]
-    myUnfoldr f x = (as' $ f x) ++ myUnfoldr f (head $ bs' $ f x)
+    myUnfoldr f b =
+        case f b of
+            Nothing -> []
+            Just (a, b') -> a : myUnfoldr f b'
+
+
+    betterIterate :: (a -> a) -> a -> [a]
+    betterIterate f x = myUnfoldr (\a -> Just (a, f a))
