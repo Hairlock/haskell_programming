@@ -33,3 +33,9 @@ module MaybeLib where
     catMaybes as = foldr (\x acc -> case x of 
                                         Just a -> a : acc
                                         Nothing -> acc) [] as
+
+
+    flipMaybe :: [Maybe a] -> Maybe [a]
+    flipMaybe as = case catMaybes as of
+                    [] -> Nothing
+                    a -> Just a
